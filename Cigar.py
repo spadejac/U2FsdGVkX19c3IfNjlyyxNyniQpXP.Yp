@@ -78,10 +78,11 @@ class Cigar(object):
             raise ValueError('Need to call build_map() to initialize first')
         if zero_based_pos < 0 or zero_based_pos > next(reversed(self.cigar_dict)):
             # querying non-existent transcript coordinate
-            raise KeyError('Invalid query coordinate {} in query file'.format(zero_based_pos))
-        
-        
-        x = zero_based_pos
-        while x not in self.cigar_dict:
-            x -= 1
-        return self.cigar_dict[x] + zero_based_pos - x        
+            # Silently ignore - don't raise an error
+            return None
+            #raise KeyError('Invalid query coordinate {} in query file'.format(zero_based_pos))
+        else:
+            x = zero_based_pos
+            while x not in self.cigar_dict:
+                x -= 1
+            return self.cigar_dict[x] + zero_based_pos - x        
