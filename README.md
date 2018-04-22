@@ -63,7 +63,25 @@ Analyzing transcripts file  [####################################]  100%
 4 translation instances have been written into output.example
 ```
 
-## Explanation/Critique
+File Contents:
+```
+$ cat sample_data/transcripts.example 
+TR1	CHR1	3	8M7D6M2I2M11D7M
+TR2	CHR2	10	20M
+$ cat sample_data/query.example 
+TR1	4
+TR2	0
+TR1	13
+TR2	10
+$ cat output.example 
+TR1	4	CHR1	7
+TR2	0	CHR2	10
+TR1	13	CHR1	23
+TR2	10	CHR2	20
+```
+
+## Critique
+[Explanation and Critique](https://github.com/spadejac/U2FsdGVkX19c3IfNjlyyxNyniQpXP.Yp/blob/master/Authors_Critique.md)
 
 
 
