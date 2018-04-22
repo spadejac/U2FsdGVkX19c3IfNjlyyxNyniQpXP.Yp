@@ -33,6 +33,7 @@ class CoordinateTranslator(object):
                         continue
         
     def translate(self, outfile):
+        mapCount = 0
         for line in open(self.query_file):
             tr_name, zero_pos = line.strip().split()
             for ref in self.transcripts[tr_name]:
@@ -43,8 +44,13 @@ class CoordinateTranslator(object):
                         outfile.write( '\t'.join([tr_name, zero_pos, ref, 
                                                   str(ref_coord)
                                                   ]) + '\n' )
+                        mapCount += 1
+                        
                     
-        print "Available mapping has been written into {}".format(outfile.name)
+        if mapCount:
+            print "{} translation instances have been written into {}".format(mapCount, outfile.name)
+        else:
+            print "No mappings found - output file {} not written".format(outfile.name)
 
 
 @click.option('--transcripts_file', required=True, type=click.Path(exists=True),
