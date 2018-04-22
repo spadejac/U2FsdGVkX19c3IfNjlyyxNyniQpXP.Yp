@@ -24,7 +24,7 @@ class Cigar(object):
         cigar_list = []
         buf = ''
         for c in cigar_as_str:
-            if c  in ['M', 'I', 'D']:
+            if c  in ['M', 'I', 'D', 'N', 'S', 'H', 'P', '=', 'X']:
                 cigar_list.append((int(buf), c))
                 buf = ''
             else:
@@ -46,31 +46,40 @@ class Cigar(object):
             # Truncate if already exists
             self.cigar_dict = OrderedDict()
         
-        self.cigar_dict[0] = pos
+        if self.cigar[0][1] in ('I', 'S'):
+            self.cigar_dict[-1] = pos-1
+        else:
+            self.cigar_dict[0] = pos
+        
 
         for offset, op in self.cigar:
 
             last_key = next(reversed(self.cigar_dict))
             last_val = self.cigar_dict[last_key]
             
-            if op == 'M':
+            if op in ('M', '=', 'X'):
                 self.cigar_dict [ last_key+offset-1 ] = last_val + offset - 1
-            if op == 'D':
+            if op in ('D', 'N'):
                 self.cigar_dict [ last_key +1 ] = last_val + offset + 1
-            if op == 'I':
+            if op in ('I', 'S'):
                 for i in range(offset):
                     self.cigar_dict [ last_key + i + 1] = -1
                 self.cigar_dict [last_key + offset + 1] = last_val + 1
-        
-        print self.cigar_dict
+            if op in ('H', 'P'):
+                continue
+                
         return self.cigar_dict
                     
     
     def map(self, zero_based_pos):
+        # Query validation
         if not self.cigar_dict:
+            # map() has been called before build_map()
             raise ValueError('Need to call build_map() to initialize first')
-        if zero_based_pos < 0:
-            raise KeyError('Invalid query coordinate')
+        if zero_based_pos < 0 or zero_based_pos > next(reversed(self.cigar_dict)):
+            # querying non-existent transcript coordinate
+            raise KeyError('Invalid query coordinate {}'.format(zero_based_pos))
+        
         
         x = zero_based_pos
         while x not in self.cigar_dict:
