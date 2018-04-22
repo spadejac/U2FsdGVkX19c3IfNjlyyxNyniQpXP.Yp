@@ -6,11 +6,7 @@ Created on Apr 18, 2018
 '''
 
 import click
-import time
 from collections import defaultdict
-
-
-from pprint import pprint
 
 from Cigar import Cigar
 
@@ -21,20 +17,12 @@ class CoordinateTranslator(object):
         self.transcripts = defaultdict(lambda : defaultdict(list))
     
     def process_transcripts_file(self):
-#         for line in open(self.transcripts_file):
-#             tr_name, chr_name, start, cigar_str = line.strip().split('\t')
-#             try: 
-#                 cigar = Cigar.fromString(cigar_str)
-#                 cigar.build_map(int(start))
-#                 self.transcripts[tr_name][chr_name].append(cigar)
-#             except IndexError:
-#                 continue
-        
-        
-        with open(self.transcripts_file) as data:
+        lineCount = (sum(1 for line in open(self.transcripts_file)))
+        with open(self.transcripts_file, 'rb') as data:
+            click.echo("Reading transcripts file {}".format(self.transcripts_file))
             with click.progressbar(data, 
-                                   label='Processing',
-                                   ) as bar:
+                                   label='Analyzing transcripts file',
+                                   length=lineCount) as bar:
                 for line in bar:
                     tr_name, chr_name, start, cigar_str = line.strip().split('\t')
                     try: 
@@ -43,7 +31,6 @@ class CoordinateTranslator(object):
                         self.transcripts[tr_name][chr_name].append(cigar)
                     except IndexError:
                         continue
-        #pprint(self.transcripts)
         
     def translate(self, outfile):
         for line in open(self.query_file):
@@ -55,7 +42,7 @@ class CoordinateTranslator(object):
                                               str(cigar.map(int(zero_pos)))
                                               ]) + '\n' )
                     
-            
+        print "Available mapping has been written into {}".format(outfile.name)
 
 @click.option('--transcripts_file', required=True, type=click.Path(exists=True),
               help='Transcripts file (4 column tab-separated)')
