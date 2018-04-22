@@ -14,6 +14,6 @@ setup(
         CoordinateTranslator=CoordinateTranslator:cli
     ''',
     project_urls={
-                 	'Source': 'https://gitlab.com/spadejac/interview_assignments/tree/master/U2FsdGVkX19c3IfNjlyyxNyniQpXP.Yp'
+                 	'Source': 'https://gitlab.com/spadejac/U2FsdGVkX19c3IfNjlyyxNyniQpXP.Yp'
 		 }
 )
