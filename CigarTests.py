@@ -57,17 +57,6 @@ class CigarTests(unittest.TestCase):
         assert self.cg.map(0) == -1
         assert self.cg.map(1) == -1
         assert self.cg.map(2) == 1
-
-    
-    def test_quick(self):
-        self.cg = Cigar.fromString('2D4M')
-        self.cg.build_map(1)
-        try:
-            for i in range(14):
-                print "{}:{}".format(i,self.cg.map(i))
-        except KeyError:
-            pass
-        
-            
+                    
 if __name__ == '__main__':
     unittest.main()
