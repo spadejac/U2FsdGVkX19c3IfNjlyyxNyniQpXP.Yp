@@ -94,7 +94,10 @@ TR2	10	CHR2	20
 This project is licensed under the MIT License. Please see [LICENSE](https://github.com/spadejac/U2FsdGVkX19c3IfNjlyyxNyniQpXP.Yp/blob/master/LICENSE) 
 for details.
 
-## Acknowledgments
+## Acknowledgments & Reference
 
+- [SAM/BAM format specification](http://samtools.github.io/hts-specs/SAMtags.pdf)
+- [Click](https://github.com/pallets/click/graphs/contributors)
+- [1000 Genomes Project](http://www.internationalgenome.org/)
 - [StackOverflow](https://stackoverflow.com)
-- [Click developers](https://github.com/pallets/click/graphs/contributors)
+
