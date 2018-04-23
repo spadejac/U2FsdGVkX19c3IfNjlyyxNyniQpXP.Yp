@@ -72,6 +72,9 @@ class Cigar(object):
                     
     
     def map(self, zero_based_pos):
+        '''
+        Returns reference coordinate given a transcript coordinate
+        '''
         # Query validation
         if not self.cigar_dict:
             # map() has been called before build_map()
