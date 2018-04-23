@@ -5,7 +5,7 @@ setup(
     version='0.1',
     author='Manoj Pillay',
     author_email='spadejac@gmail.com',
-    python_requires='>=2.7,<=3.0',
+    python_requires='>=2.7',
     py_modules=['CoordinateTranslator', 'Cigar', 'CigarTests'],
     install_requires=[
         'Click',
