@@ -18,7 +18,7 @@ class CoordinateTranslator(object):
     
     def process_transcripts_file(self):
         lineCount = (sum(1 for line in open(self.transcripts_file)))
-        with open(self.transcripts_file, 'rb') as data:
+        with open(self.transcripts_file, 'r') as data:
             click.echo("Reading transcripts file {}".format(self.transcripts_file))
             with click.progressbar(data, 
                                    label='Analyzing transcripts file',

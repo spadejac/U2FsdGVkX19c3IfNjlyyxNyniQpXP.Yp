@@ -11,9 +11,9 @@ occurs.
 To install locally on your computer
 
 ```bash
-git clone https://github.com/spadejac/U2FsdGVkX19c3IfNjlyyxNyniQpXP.Yp CoordinateTranslator
+git clone https://github.com/spadejac/U2FsdGVkX19c3IfNjlyyxNyniQpXP.Yp.git CoordinateTranslator
 cd CoordinateTranslator
-python2.7 setup.py install
+python setup.py install
 ```
 
 *Note: Taking this approach to installation ensures appropriate installation of
@@ -23,7 +23,7 @@ prerequisites.*
 From within the directory where package was installed (**CoordinateTranslator** 
 if following installation instructions), run:
 ```bash
-python2.7 CigarTests.py
+python CigarTests.py
 ```
 The tests are intended to test against various CIGAR string formats and common
 use of methods available. All tests should pass.
