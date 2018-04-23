@@ -48,9 +48,9 @@ class CoordinateTranslator(object):
                         
                     
         if mapCount:
-            print "{} translation instances have been written into {}".format(mapCount, outfile.name)
+            print ("{} translation instances have been written into {}".format(mapCount, outfile.name))
         else:
-            print "No mappings found - output file {} not written".format(outfile.name)
+            print ("No mappings found - output file {} not written".format(outfile.name))
 
 
 @click.option('--transcripts_file', required=True, type=click.Path(exists=True),
